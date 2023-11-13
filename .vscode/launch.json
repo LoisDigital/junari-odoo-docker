@@ -1,0 +1,35 @@
+{
+    // This configuration is meant to be used inside the odoo-service
+    // container created by the docker-compose-dev.yml file.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Odoo",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "--database=development",
+                "--dev=xml,qweb",
+                "--config=/etc/odoo/odoo.conf",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Init DB",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "--dev=xml,qweb",
+                "--config=/etc/odoo/odoo.conf",
+                "--load-language=fr_FR",
+                "--init=web_enterprise",
+                "--database=development",
+            ],
+            "console": "integratedTerminal"
+        },
+    ]
+}

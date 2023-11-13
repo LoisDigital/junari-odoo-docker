@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.black-formatter",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "redhat.vscode-xml",
+        "amazonwebservices.aws-toolkit-vscode",
+    ]
+}
