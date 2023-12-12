@@ -10,9 +10,52 @@
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
             "args": [
+                // "--database=development",
+                "--dev=xml,qweb",
+                "--config=/etc/odoo/odoo.conf",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Run tests",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
                 "--database=development",
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
+                "--test-tags=.test_01_pos_inlane_tour",
+                // "--screencasts=/tmp",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Update module",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "--database=development",
+                "--dev=xml,qweb",
+                "--config=/etc/odoo/odoo.conf",
+                "--update=pos_numpad_ext",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Install module",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "--database=development",
+                "--dev=xml,qweb",
+                "--config=/etc/odoo/odoo.conf",
+                "--init=pos_numpad_ext",
             ],
             "console": "integratedTerminal"
         },
@@ -26,7 +69,7 @@
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
                 "--load-language=fr_FR",
-                "--init=web_enterprise",
+                "--init=inlane",
                 "--database=development",
             ],
             "console": "integratedTerminal"

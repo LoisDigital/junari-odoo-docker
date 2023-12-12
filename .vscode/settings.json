@@ -4,5 +4,6 @@
         "editor.formatOnSave": false,
         "editor.formatOnPaste": true,
         "editor.formatOnType": false
-    }
+    },
+    "python.languageServer": "None"
 }

@@ -27,6 +27,12 @@ RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releas
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
+# Needed for JS tour tests
+# RUN pip install websocket-client
+# RUN apt-get update
+# RUN apt-get install chromium -y
+# RUN apt install ffmpeg -y
+
 # Create odoo user and directories and set permissions
 RUN useradd -ms /bin/bash odoo \
     && mkdir /etc/odoo /opt/odoo /opt/odoo/scripts \
@@ -54,7 +60,6 @@ RUN pip3 install pip --upgrade
 RUN pip3 install --no-cache-dir -r odoo/requirements.txt
 
 # Define runtime configuration
-COPY src/scripts/* /opt/odoo/scripts
 COPY src/odoo.conf /etc/odoo
 RUN chown odoo:odoo /etc/odoo/odoo.conf
 
