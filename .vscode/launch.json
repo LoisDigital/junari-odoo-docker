@@ -41,7 +41,7 @@
                 "--database=development",
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
-                "--update=pos_numpad_ext",
+                "--update=fluentfalcon_website",
             ],
             "console": "integratedTerminal"
         },
@@ -55,7 +55,7 @@
                 "--database=development",
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
-                "--init=pos_numpad_ext",
+                "--init=fluentfalcon_website",
             ],
             "console": "integratedTerminal"
         },
