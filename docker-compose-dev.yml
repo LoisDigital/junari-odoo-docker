@@ -16,10 +16,9 @@ services:
       - PASSWORD=myodoo
       - ODOO_ENV=dev
     volumes:
-      - "../fenuasoftware:/opt/odoo/custom_addons/fenuasoftware"
-      - "../enterprise:/opt/odoo/custom_addons/enterprise"
+      - "../addons:/opt/odoo/custom_addons"
       - "./.vscode:/opt/odoo/.vscode"
-      - "./src/odoo.conf:/etc/odoo/odoo.conf"
+      - "./src/odoo.conf:/opt/odoo/odoo.conf"
     tty: true
   mydb:
     image: postgres:16

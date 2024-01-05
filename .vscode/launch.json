@@ -10,7 +10,7 @@
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
             "args": [
-                // "--database=development",
+                "--database=development",
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
             ],
