@@ -19,6 +19,7 @@ services:
       - "../addons:/opt/odoo/custom_addons"
       - "./.vscode:/opt/odoo/.vscode"
       - "./src/odoo.conf:/opt/odoo/odoo.conf"
+      - "./generated-files:/opt/odoo/generated-files"
     tty: true
   mydb:
     image: postgres:16
