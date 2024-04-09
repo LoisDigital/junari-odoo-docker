@@ -20,6 +20,7 @@ services:
       - "./.vscode:/opt/odoo/.vscode"
       - "./src/odoo.conf:/opt/odoo/odoo.conf"
       - "./generated-files:/opt/odoo/generated-files"
+      - "../files:/opt/odoo/files"
     tty: true
   mydb:
     image: postgres:16

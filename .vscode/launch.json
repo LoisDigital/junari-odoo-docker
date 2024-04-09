@@ -26,7 +26,7 @@
                 "--database=development",
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
-                "--test-tags=.test_01_pos_inlane_tour",
+                "--test-tags=/srs",
                 // "--screencasts=/tmp",
             ],
             "console": "integratedTerminal"
