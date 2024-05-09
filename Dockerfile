@@ -54,8 +54,7 @@ RUN pip3 install pip --upgrade
 RUN pip3 install --no-cache-dir -r odoo/requirements.txt
 
 # App specific packages
-RUN apt-get install ffmpeg -y
-RUN pip install pydub
+RUN pip install google-cloud-texttospeech
 
 # Define runtime configuration
 COPY src/odoo.conf /etc/odoo
