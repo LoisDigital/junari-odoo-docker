@@ -1,0 +1,10 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": false,
+        "editor.formatOnPaste": true,
+        "editor.formatOnType": false
+    },
+    "python.languageServer": "None",
+    "editor.defaultFormatter": "ms-python.black-formatter"
+}
