@@ -1,0 +1,38 @@
+FROM junari/odoo:16.0
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TZ Pacific/Tahiti
+
+USER root
+
+# Taken from https://github.com/Chia-Network/chia-blockchain/discussions/9673
+RUN apt remove nodejs -y
+RUN rm -rf /usr/local/bin/node*
+RUN rm -rf /usr/local/bin/npm*
+RUN rm -rf /etc/apt/sources.list.d/nodesource.list
+
+RUN echo "LANGUAGE=fr" > /etc/environment 
+RUN echo "fr_FR.UTF-8 UTF-8" > /etc/locale.gen
+RUN echo "$TZ" > /etc/timezone
+RUN rm -f /etc/localtime
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
+RUN dpkg-reconfigure -f noninteractive tzdata
+RUN apt-get update && apt-get install -y -o DPkg::Options::="--force-confnew" --no-install-recommends git locales net-tools curl ca-certificates gnupg dirmngr python3-dev nodejs npm libpq5
+RUN npm install -g rtlcss swagger-ui-dist
+RUN curl https://bin.gov.pf/artifactory/ca/casit-prod2.crt > /usr/local/share/ca-certificates/casit-prod2.crt
+RUN update-ca-certificates
+RUN locale-gen fr_FR.UTF-8
+RUN dpkg-reconfigure locales
+RUN rm -rf /var/lib/apt/lists/*
+
+ENV LANG fr_FR:UTF-8
+ENV LANGUAGE fr
+ENV LC_CTYPE fr_FR.utf8
+ENV LC_MESSAGES fr_FR.utf8
+ENV LC_ALL fr_FR.utf8
+ENV ADM_PASSWORD toto
+
+# Use the junari odoo-config script to list DB (see https://github.com/junariltd/junari-odoo-docker)
+RUN odoo-config list_db=True admin_passwd=admin
+
+USER odoo

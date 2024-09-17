@@ -1,34 +1,29 @@
 version: "3.1"
 services:
-  web:
+  odoo-service:
     user: root
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on:
-      mydb:
-        condition: service_healthy
+      - postgresql15-service
     ports:
       - "8069:8069"
     environment:
-      - HOST=mydb
+      - HOST=postgresql15-service
       - USER=odoo
       - PASSWORD=myodoo
       - ODOO_ENV=dev
     volumes:
-      - "../fenuasoftware:/opt/odoo/custom_addons/fenuasoftware"
+      - "../capl:/opt/odoo/custom_addons/capl"
       - "../enterprise:/opt/odoo/custom_addons/enterprise"
       - "./.vscode:/opt/odoo/.vscode"
       - "./src/odoo.conf:/etc/odoo/odoo.conf"
+    command: bash
     tty: true
-  mydb:
-    image: postgres:16
+  postgresql15-service:
+    image: postgres:15
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 10s
-      timeout: 5s
-      retries: 5

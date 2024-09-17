@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-python.black-formatter",
+        "ms-python.pylint",
+        "ms-python.python",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "redhat.vscode-xml",
+        "amazonwebservices.aws-toolkit-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-french",
+    ]
+}
