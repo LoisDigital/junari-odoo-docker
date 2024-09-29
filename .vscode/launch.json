@@ -5,20 +5,21 @@
     "configurations": [
         {
             "name": "Run Odoo",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
             "args": [
-                // "--database=development",
-                "--dev=xml,qweb",
+                "--database=development",
+                "--init=customize",
+                // "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
             ],
             "console": "integratedTerminal"
         },
         {
             "name": "Run tests",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
@@ -33,7 +34,7 @@
         },
         {
             "name": "Update module",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
@@ -47,7 +48,7 @@
         },
         {
             "name": "Install module",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
@@ -61,7 +62,7 @@
         },
         {
             "name": "Init DB",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "cwd": "${workspaceRoot}",
             "program": "${workspaceRoot}/odoo/odoo-bin",
@@ -71,6 +72,19 @@
                 "--load-language=fr_FR",
                 "--init=inlane",
                 "--database=development",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Scaffold",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "scaffold",
+                "acd_website",
+                "/opt/odoo/custom_addons/loistalagrand"
             ],
             "console": "integratedTerminal"
         },
