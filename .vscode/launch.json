@@ -18,6 +18,21 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Run shell",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/odoo/odoo-bin",
+            "args": [
+                "shell",
+                "--database=loistalagrand",
+                "--config=/etc/odoo/odoo.conf",
+                "--no-http", // Prevents "port already used" error
+                "--shell-interface=ipython",
+            ],
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Run tests",
             "type": "debugpy",
             "request": "launch",
