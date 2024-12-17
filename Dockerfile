@@ -1,8 +1,10 @@
 
-FROM python:3.11-slim-bullseye
+FROM ubuntu:jammy
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
+ARG ODOO_VERSION
+ARG ODOO_REVISION
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Generate locale C.UTF-8 for postgres and general locale data
@@ -12,15 +14,18 @@ ENV LANG C.UTF-8
 RUN apt-get update && \
     apt-get install -y libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev \
     libtiff5-dev libjpeg-dev libopenjp2-7-dev zlib1g-dev libfreetype6-dev \
-    liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev libpq-dev
+    liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev libpq-dev \
+    python3-pip
 
 # Install additional tools needed for build & run
-RUN apt-get install -y \
+# For some reason, python3.11 is needed, but Odoo will actually run with Python 3.10.
+RUN apt-get update && apt-get install -y python3.11 \ 
     gcc g++ curl git nano postgresql-client
 
 # install wkhtmltox for PDF reports
-RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.buster_amd64.deb \
-    && apt-get install -y ./wkhtmltox.deb \
+RUN curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_amd64.deb \
+    && echo 967390a759707337b46d1c02452e2bb6b2dc6d59 wkhtmltox.deb | sha1sum -c - \
+    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
     && rm wkhtmltox.deb
 
 # Install Node
@@ -49,10 +54,8 @@ RUN git clone --branch=17.0 --depth=1 https://github.com/odoo/odoo.git odoo
 # RUN cd odoo && git reset --hard $ODOO_REVISION
 
 # Patch odoo requirements file
-RUN sed -i "s/gevent==21\.8\.0 ; python_version > '3\.9'/gevent==22\.10\.2 ; python_version > '3\.9'/" odoo/requirements.txt \
-    && sed -i "s/greenlet==1\.1\.2 ; python_version  > '3\.9'/greenlet==2\.0\.1 ; python_version > '3\.9'/" odoo/requirements.txt
-#     && sed -i "s/lxml==4\.6\.5/lxml==4\.9\.2/" odoo/requirements.txt \
-#     && sed -i "s/reportlab==3\.5\.59/reportlab==3\.6\.12/" odoo/requirements.txt
+# We need to install a different version of gevent.
+RUN sed -i "s/gevent==21\.8\.0 ; sys_platform != 'win32' and python_version == '3\.10'/gevent==21\.12\.0 ; sys_platform != 'win32' and python_version == '3\.11'/" odoo/requirements.txt
 
 # Install Odoo python package requirements
 USER root

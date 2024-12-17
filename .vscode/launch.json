@@ -69,8 +69,8 @@
             "args": [
                 "--dev=xml,qweb",
                 "--config=/etc/odoo/odoo.conf",
-                "--load-language=fr_FR",
-                "--init=inlane",
+                //"--load-language=fr_FR",
+                "--init=development",
                 "--database=development",
             ],
             "console": "integratedTerminal"

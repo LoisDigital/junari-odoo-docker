@@ -1,3 +1,5 @@
 # Odoo Docker
 
-Ce dépôt permet de mettre en place un environnement de développement Odoo rapidement en utilisant Docker et Docker compose.
+This repo allows to quickly create Odoo development environments using Docker.
+
+This repo originally was a fork from https://github.com/junariltd/junari-odoo-docker.
